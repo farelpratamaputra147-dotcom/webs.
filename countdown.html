@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer - Shopee</title>
+    <link rel="stylesheet" href="popup.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .timer {
+            font-size: 48px;
+            color: #FF6B35;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .message {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .lanjut-btn {
+            background: #a8a8a8;
+            color: #000000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: not-allowed;
+            margin-top: 20px;
+        }
+
+        .lanjut-btn.active {
+            background: #FF6B35;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hitung Mundur</h2>
+        <div class="message">Mohon tunggu sebentar...</div>
+        <div class="timer" id="timer">60</div>
+        <button class="lanjut-btn" id="lanjutBtn" disabled onclick="showPopup()">Lanjut</button>
+    </div>
+
+    <script src="popup.js"></script>
+    <script>
+        let timeLeft = 60;
+        const timerElement = document.getElementById('timer');
+        const lanjutBtn = document.getElementById('lanjutBtn');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timerElement.textContent = 'Selesai!';
+                lanjutBtn.disabled = false;
+                lanjutBtn.classList.add('active');
+            }
+        }, 1000);
+
+        function showPopup() {
+            showImagePopup('Notifikasi', 'Waktu hitung mundur telah selesai. Klik OK untuk melanjutkan.', 'asset/popup.jpg');
+        }
+    </script>
+</body>
+</html>

